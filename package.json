@@ -130,5 +130,10 @@
     },
     "dependencies": {
         "vscode-nls": "^2.0.2"
-    }
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/jackytsu/vscode-text-transformer"
+    },
+    "homepage": "https://github.com/jackytsu/vscode-text-transformer/blob/master/README.md"
 }
