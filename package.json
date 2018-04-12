@@ -1,9 +1,10 @@
 {
     "name": "text-transformer",
-    "displayName": "text-transformer",
-    "description": "text-transformer",
-    "version": "0.0.1",
+    "displayName": "Text Transformer for VS Code",
+    "description": "A utility can modify the word capitalized for vscode.",
+    "version": "0.0.2",
     "publisher": "jackytsu",
+    "license": "MIT",
     "engines": {
         "vscode": "^1.22.0"
     },
@@ -41,80 +42,68 @@
         }],
         "menus": {
             "editor/context": [{
-                    "when": "editorHasSelection",
-                    "command": "text-transformer.upper",
-                    "alt": "text-transformer.upper",
-                    "group": "7_modification@1"
-                },
-                {
-                    "when": "editorHasSelection",
-                    "command": "text-transformer.lower",
-                    "alt": "text-transformer.lower",
-                    "group": "7_modification@2"
-                },
-                {
-                    "when": "editorHasSelection",
-                    "command": "text-transformer.reverse",
-                    "alt": "text-transformer.reverse",
-                    "group": "7_modification@3"
-                },
-                {
-                    "when": "editorHasSelection",
-                    "command": "text-transformer.camel",
-                    "alt": "text-transformer.camel",
-                    "group": "7_modification@4"
-                },
-                {
-                    "when": "editorHasSelection",
-                    "command": "text-transformer.dashed",
-                    "alt": "text-transformer.dashed",
-                    "group": "7_modification@5"
-                },
-                {
-                    "when": "editorHasSelection",
-                    "command": "text-transformer.underline",
-                    "alt": "text-transformer.underline",
-                    "group": "7_modification@6"
-                }
-            ]
+                "when": "editorHasSelection",
+                "command": "text-transformer.upper",
+                "alt": "text-transformer.upper",
+                "group": "7_modification@1"
+            }, {
+                "when": "editorHasSelection",
+                "command": "text-transformer.lower",
+                "alt": "text-transformer.lower",
+                "group": "7_modification@2"
+            }, {
+                "when": "editorHasSelection",
+                "command": "text-transformer.reverse",
+                "alt": "text-transformer.reverse",
+                "group": "7_modification@3"
+            }, {
+                "when": "editorHasSelection",
+                "command": "text-transformer.camel",
+                "alt": "text-transformer.camel",
+                "group": "7_modification@4"
+            }, {
+                "when": "editorHasSelection",
+                "command": "text-transformer.dashed",
+                "alt": "text-transformer.dashed",
+                "group": "7_modification@5"
+            }, {
+                "when": "editorHasSelection",
+                "command": "text-transformer.underline",
+                "alt": "text-transformer.underline",
+                "group": "7_modification@6"
+            }]
         },
         "keybindings": [{
-                "command": "text-transformer.upper",
-                "key": "ctrl+alt+u",
-                "mac": "cmd+alt+u",
-                "when": "editorTextFocus"
-            },
-            {
-                "command": "text-transformer.lower",
-                "key": "ctrl+alt+l",
-                "mac": "cmd+alt+l",
-                "when": "editorTextFocus"
-            },
-            {
-                "command": "text-transformer.reverse",
-                "key": "ctrl+alt+r",
-                "mac": "cmd+alt+r",
-                "when": "editorTextFocus"
-            },
-            {
-                "command": "text-transformer.camel",
-                "key": "ctrl+alt+c",
-                "mac": "cmd+alt+c",
-                "when": "editorTextFocus"
-            },
-            {
-                "command": "text-transformer.dashed",
-                "key": "ctrl+alt+d",
-                "mac": "cmd+alt+d",
-                "when": "editorTextFocus"
-            },
-            {
-                "command": "text-transformer.underline",
-                "key": "ctrl+alt+z",
-                "mac": "cmd+alt+z",
-                "when": "editorTextFocus"
-            }
-        ]
+            "command": "text-transformer.upper",
+            "key": "ctrl+alt+u",
+            "mac": "cmd+alt+u",
+            "when": "editorTextFocus"
+        }, {
+            "command": "text-transformer.lower",
+            "key": "ctrl+alt+l",
+            "mac": "cmd+alt+l",
+            "when": "editorTextFocus"
+        }, {
+            "command": "text-transformer.reverse",
+            "key": "ctrl+alt+r",
+            "mac": "cmd+alt+r",
+            "when": "editorTextFocus"
+        }, {
+            "command": "text-transformer.camel",
+            "key": "ctrl+alt+c",
+            "mac": "cmd+alt+c",
+            "when": "editorTextFocus"
+        }, {
+            "command": "text-transformer.dashed",
+            "key": "ctrl+alt+d",
+            "mac": "cmd+alt+d",
+            "when": "editorTextFocus"
+        }, {
+            "command": "text-transformer.underline",
+            "key": "ctrl+alt+z",
+            "mac": "cmd+alt+z",
+            "when": "editorTextFocus"
+        }]
     },
     "scripts": {
         "postinstall": "node ./node_modules/vscode/bin/install",
