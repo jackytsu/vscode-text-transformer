@@ -1,0 +1,134 @@
+{
+    "name": "text-transformer",
+    "displayName": "text-transformer",
+    "description": "text-transformer",
+    "version": "0.0.1",
+    "publisher": "jackytsu",
+    "engines": {
+        "vscode": "^1.22.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:text-transformer.dashed",
+        "onCommand:text-transformer.underline",
+        "onCommand:text-transformer.upper",
+        "onCommand:text-transformer.lower",
+        "onCommand:text-transformer.reverse",
+        "onCommand:text-transformer.camel"
+    ],
+    "main": "./text-transformer",
+    "contributes": {
+        "commands": [{
+            "command": "text-transformer.upper",
+            "title": "%text-transformer.upper.title%"
+        }, {
+            "command": "text-transformer.lower",
+            "title": "%text-transformer.lower.title%"
+        }, {
+            "command": "text-transformer.reverse",
+            "title": "%text-transformer.reverse.title%"
+        }, {
+            "command": "text-transformer.camel",
+            "title": "%text-transformer.camel.title%"
+        }, {
+            "command": "text-transformer.dashed",
+            "title": "%text-transformer.dashed.title%"
+        }, {
+            "command": "text-transformer.underline",
+            "title": "%text-transformer.underline.title%"
+        }],
+        "menus": {
+            "editor/context": [{
+                    "when": "editorHasSelection",
+                    "command": "text-transformer.upper",
+                    "alt": "text-transformer.upper",
+                    "group": "7_modification@1"
+                },
+                {
+                    "when": "editorHasSelection",
+                    "command": "text-transformer.lower",
+                    "alt": "text-transformer.lower",
+                    "group": "7_modification@2"
+                },
+                {
+                    "when": "editorHasSelection",
+                    "command": "text-transformer.reverse",
+                    "alt": "text-transformer.reverse",
+                    "group": "7_modification@3"
+                },
+                {
+                    "when": "editorHasSelection",
+                    "command": "text-transformer.camel",
+                    "alt": "text-transformer.camel",
+                    "group": "7_modification@4"
+                },
+                {
+                    "when": "editorHasSelection",
+                    "command": "text-transformer.dashed",
+                    "alt": "text-transformer.dashed",
+                    "group": "7_modification@5"
+                },
+                {
+                    "when": "editorHasSelection",
+                    "command": "text-transformer.underline",
+                    "alt": "text-transformer.underline",
+                    "group": "7_modification@6"
+                }
+            ]
+        },
+        "keybindings": [{
+                "command": "text-transformer.upper",
+                "key": "ctrl+alt+u",
+                "mac": "cmd+alt+u",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "text-transformer.lower",
+                "key": "ctrl+alt+l",
+                "mac": "cmd+alt+l",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "text-transformer.reverse",
+                "key": "ctrl+alt+r",
+                "mac": "cmd+alt+r",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "text-transformer.camel",
+                "key": "ctrl+alt+c",
+                "mac": "cmd+alt+c",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "text-transformer.dashed",
+                "key": "ctrl+alt+d",
+                "mac": "cmd+alt+d",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "text-transformer.underline",
+                "key": "ctrl+alt+z",
+                "mac": "cmd+alt+z",
+                "when": "editorTextFocus"
+            }
+        ]
+    },
+    "scripts": {
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "node ./node_modules/vscode/bin/test"
+    },
+    "devDependencies": {
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.6",
+        "eslint": "^4.11.0",
+        "@types/node": "^7.0.43",
+        "@types/mocha": "^2.2.42",
+        "vscode-nls-dev": "^2.1.3"
+    },
+    "dependencies": {
+        "vscode-nls": "^2.0.2"
+    }
+}
