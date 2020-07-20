@@ -2,11 +2,11 @@
     "name": "text-transformer",
     "displayName": "Text Transformer for VS Code",
     "description": "A utility can modify the word capitalized for vscode.",
-    "version": "0.0.3",
-    "publisher": "jackytsu",
+    "version": "0.0.4",
+    "publisher": "JackyTsu",
     "license": "MIT",
     "engines": {
-        "vscode": "^1.32.0"
+        "vscode": "^1.34.0"
     },
     "categories": [
         "Other"
@@ -19,7 +19,7 @@
         "onCommand:text-transformer.reverse",
         "onCommand:text-transformer.camel"
     ],
-    "main": "./text-transformer",
+    "main": "./out/text-transformer.js",
     "contributes": {
         "commands": [
             {
@@ -128,12 +128,17 @@
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
-        "lint": "eslint . --ext .js"
+        "compile": "tsc -p ./",
+        "lint": "eslint . --ext .ts,.tsx",
+        "watch": "tsc -watch -p ./"
     },
     "devDependencies": {
         "@types/node": "^12.12.0",
-        "@types/vscode": "^1.32.0",
-        "eslint": "^7.1.0"
+        "@types/vscode": "^1.34.0",
+        "@typescript-eslint/eslint-plugin": "^3.0.2",
+        "@typescript-eslint/parser": "^3.0.2",
+        "eslint": "^7.1.0",
+        "typescript": "^3.9.4"
     },
     "dependencies": {
         "vscode-nls": "^4.1.0"
