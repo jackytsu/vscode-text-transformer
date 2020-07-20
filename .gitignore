@@ -6,6 +6,8 @@ vsc-extension-quickstart.md
 .eslintrc.json
 node_modules/
 .*
+out/
 !.eslintrc.js
 !.vscodeignore
 !.vscode/
+*.vsix
