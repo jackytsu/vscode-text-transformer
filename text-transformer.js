@@ -1,14 +1,13 @@
-const vscode = require('vscode');
+const vscode = require("vscode");
 
 function activate(context) {
 
-    var getStringArray = function (text) {
-        var str = [],
-            lastPos = 0;
+    const getStringArray = function (text) {
+        let str = [], lastPos = 0, i;
 
-        for (var i = 0; i < text.length; i++) {
+        for (i = 0; i < text.length; i++) {
             if (/[\s\-_A-Z]/.test(text.charAt(i))) {
-                var s = text.substring(lastPos, i).replace(/[\s\-_]/, "");
+                const s = text.substring(lastPos, i).replace(/[\s\-_]/, "");
                 if (s.length > 0) {
                     str.push(s.toLowerCase());
                 }
@@ -17,7 +16,7 @@ function activate(context) {
         }
 
         if (lastPos < text.length) {
-            var s = text.substring(lastPos, i).replace(/[\s\-_]/, "");
+            const s = text.substring(lastPos, i).replace(/[\s\-_]/, "");
             if (s.length > 0) {
                 str.push(s.toLowerCase());
             }
@@ -26,7 +25,7 @@ function activate(context) {
         return str;
     };
 
-    var textTransform = function (separator) {
+    const textTransform = function (separator) {
         let editor = vscode.window.activeTextEditor;
         if (editor) {
             if (!editor.selections || editor.selections.length === 0) {
@@ -35,12 +34,12 @@ function activate(context) {
             }
 
             editor.edit(function (edit) {
-                for (var i = 0; i < editor.selections.length; i++) {
+                for (let i = 0; i < editor.selections.length; i++) {
                     let selection = editor.selections[i];
 
                     if (!selection.isEmpty) {
                         let range = new vscode.Range(selection.start, selection.end);
-                        var text = editor.document.getText(range);
+                        let text = editor.document.getText(range);
 
                         text = getStringArray(text).join(separator);
                         edit.replace(range, text);
@@ -52,7 +51,7 @@ function activate(context) {
         }
     };
 
-    console.log('Congratulations, your extension "text-transformer" is now active!');
+    // console.log('Congratulations, your extension "text-transformer" is now active!');
 
     let dashed = vscode.commands.registerCommand('text-transformer.dashed', function () {
         textTransform('-');
@@ -73,12 +72,12 @@ function activate(context) {
             }
 
             editor.edit(function (edit) {
-                for (var i = 0; i < editor.selections.length; i++) {
+                for (let i = 0; i < editor.selections.length; i++) {
                     let selection = editor.selections[i];
 
                     if (!selection.isEmpty) {
                         let range = new vscode.Range(selection.start, selection.end);
-                        var text = editor.document.getText(range).toUpperCase();
+                        const text = editor.document.getText(range).toUpperCase();
                         edit.replace(range, text);
                     }
                 }
@@ -98,12 +97,12 @@ function activate(context) {
             }
 
             editor.edit(function (edit) {
-                for (var i = 0; i < editor.selections.length; i++) {
+                for (let i = 0; i < editor.selections.length; i++) {
                     let selection = editor.selections[i];
 
                     if (!selection.isEmpty) {
                         let range = new vscode.Range(selection.start, selection.end);
-                        var text = editor.document.getText(range).toLowerCase();
+                        const text = editor.document.getText(range).toLowerCase();
                         edit.replace(range, text);
                     }
                 }
@@ -123,17 +122,17 @@ function activate(context) {
             }
 
             editor.edit(function (edit) {
-                for (var i = 0; i < editor.selections.length; i++) {
+                for (let i = 0; i < editor.selections.length; i++) {
                     let selection = editor.selections[i];
 
                     if (!selection.isEmpty) {
                         let range = new vscode.Range(selection.start, selection.end);
-                        var text = editor.document.getText(range);
-                        var str = [];
+                        const text = editor.document.getText(range);
+                        const str = [];
 
-                        for (var i = 0; i < text.length; i++) {
-                            var s = text.charAt(i);
-                            str.push(s.toLowerCase() == s ? s.toUpperCase() : s.toLowerCase());
+                        for (i = 0; i < text.length; i++) {
+                            const s = text.charAt(i);
+                            str.push(s.toLowerCase() === s ? s.toUpperCase() : s.toLowerCase());
                         }
                         edit.replace(range, str.join(''));
                     }
@@ -154,14 +153,14 @@ function activate(context) {
             }
 
             editor.edit(function (edit) {
-                for (var i = 0; i < editor.selections.length; i++) {
+                for (let i = 0; i < editor.selections.length; i++) {
                     let selection = editor.selections[i];
 
                     if (!selection.isEmpty) {
                         let range = new vscode.Range(selection.start, selection.end);
-                        var text = getStringArray(editor.document.getText(range)).join('-');
-                        text = text.replace(/(\-[a-z])/g, function (w) {
-                            return w.toUpperCase().replace(/\-/, "");
+                        let text = getStringArray(editor.document.getText(range)).join('-');
+                        text = text.replace(/(-[a-z])/g, function (w) {
+                            return w.toUpperCase().replace(/-/, "");
                         });
                         edit.replace(range, text);
                     }
@@ -173,7 +172,11 @@ function activate(context) {
     });
     context.subscriptions.push(camel);
 }
-exports.activate = activate;
 
-function deactivate() {}
-exports.deactivate = deactivate;
+function deactivate() {
+}
+
+module.exports = {
+    activate,
+    deactivate
+};

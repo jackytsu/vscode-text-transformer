@@ -1,6 +1,10 @@
 # Change Log
 All notable changes to the "Text Transformer for VS Code" extension will be documented in this file.
 
+## [0.0.3]
+- update package.json info.
+- upgrade the dependencies.
+
 ## [0.0.2]
 - update package.json info.
 
