@@ -5,3 +5,6 @@ jsconfig.json
 vsc-extension-quickstart.md
 .eslintrc.json
 node_modules/
+.*
+!.eslintrc.js
+!.vscodeignore

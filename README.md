@@ -2,7 +2,7 @@
 
 A utility can modify the word capitalized for vscode.
 
-##Features
+## Features
 1. Upper Case, shortcut key: Alt + Ctrl + U;
 2. Lower Case, shortcut key: Alt + Ctrl + L;
 3. Reverse Case, shortcut key: Alt + Ctrl + R;
@@ -14,7 +14,7 @@ A utility can modify the word capitalized for vscode.
 
 一个可以修改单词大小写的实用工具。
 
-##特性
+## 特性
 1. 全大写，快捷键：Alt + Ctrl + U；
 2. 全小写，快捷键：Alt + Ctrl + L；
 3. 大小写反转，快捷键：: Alt + Ctrl + R；
