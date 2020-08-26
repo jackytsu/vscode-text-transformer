@@ -3,6 +3,7 @@
 	"text-transformer.lower.title": "Lower Case",
 	"text-transformer.reverse.title": "Reverse Case",
 	"text-transformer.camel.title": "Camel Case",
+	"text-transformer.camel_space.title": "Upper Camel Case with Space",
 	"text-transformer.dashed.title": "Dashed Line",
 	"text-transformer.underline.title": "Underline"
 }
