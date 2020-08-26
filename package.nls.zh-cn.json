@@ -3,6 +3,7 @@
 	"text-transformer.lower.title": "小写",
 	"text-transformer.reverse.title": "反转",
 	"text-transformer.camel.title": "驼峰",
+	"text-transformer.camel_space.title": "大驼峰带空格",
 	"text-transformer.dashed.title": "短划线",
 	"text-transformer.underline.title": "下划线"
 }
