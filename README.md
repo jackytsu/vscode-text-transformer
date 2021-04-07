@@ -9,7 +9,8 @@ A utility can modify the word capitalized for vscode.
 4. Camel Case, shortcut key: Alt + Ctrl + C;
 5. Dashed Line, shortcut key: Alt + Ctrl + D;
 6. Underline, shortcut key: Alt + Ctrl + Z.
-6. Upper Camel Case with Space, shortcut key: Alt + Ctrl + Space.
+7. Upper Camel Case with Space, shortcut key: Alt + Ctrl + Space.
+8. Pascal Case, shortcut key: Alt + Ctrl + P.
 
 ------
 
@@ -23,3 +24,4 @@ A utility can modify the word capitalized for vscode.
 5. 短划线分隔，快捷键： Alt + Ctrl + D；
 6. 下划线分隔，快捷键：Alt + Ctrl + Z。
 7. 大驼峰带空格，快捷键：Alt + Ctrl + Space。
+8. 帕斯卡(大驼峰式)命名，快捷键：Alt + Ctrl + P；
