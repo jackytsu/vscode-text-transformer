@@ -2,7 +2,7 @@
     "name": "text-transformer",
     "displayName": "Text Transformer for VS Code",
     "description": "A utility can modify the word capitalized for vscode.",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "publisher": "JackyTsu",
     "license": "MIT",
     "engines": {
@@ -18,7 +18,8 @@
         "onCommand:text-transformer.lower",
         "onCommand:text-transformer.reverse",
         "onCommand:text-transformer.camel",
-        "onCommand:text-transformer.camel_space"
+        "onCommand:text-transformer.camel_space",
+        "onCommand:text-transformer.pascal"
     ],
     "main": "./out/text-transformer.js",
     "contributes": {
@@ -42,6 +43,10 @@
             {
                 "command": "text-transformer.camel_space",
                 "title": "%text-transformer.camel_space.title%"
+            },
+            {
+                "command": "text-transformer.pascal",
+                "title": "%text-transformer.pascal.title%"
             },
             {
                 "command": "text-transformer.dashed",
@@ -95,6 +100,12 @@
                     "command": "text-transformer.underline",
                     "alt": "text-transformer.underline",
                     "group": "7_modification@6"
+                },
+                {
+                    "when": "editorHasSelection",
+                    "command": "text-transformer.pascal",
+                    "alt": "text-transformer.pascal",
+                    "group": "7_modification@8"
                 }
             ]
         },
@@ -127,6 +138,12 @@
                 "command": "text-transformer.camel_space",
                 "key": "ctrl+alt+space",
                 "mac": "cmd+alt+space",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "text-transformer.pascal",
+                "key": "ctrl+alt+p",
+                "mac": "cmd+alt+p",
                 "when": "editorTextFocus"
             },
             {
