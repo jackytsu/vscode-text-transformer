@@ -1,6 +1,9 @@
 # Change Log
 All notable changes to the "Text Transformer for VS Code" extension will be documented in this file.
 
+## [0.0.6]
+- add pascal case.
+
 ## [0.0.5]
 - add upper camel with space type.
 

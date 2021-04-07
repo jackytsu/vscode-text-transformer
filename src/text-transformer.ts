@@ -201,6 +201,35 @@ function activate(context: vscode.ExtensionContext) {
         }
     });
     context.subscriptions.push(camel_space);
+
+    const pascal = vscode.commands.registerCommand("text-transformer.pascal", function () {
+        const editor = vscode.window.activeTextEditor;
+        if (editor) {
+            if (!editor.selections || editor.selections.length === 0) {
+                vscode.window.showInformationMessage("There is no selected text!");
+                return;
+            }
+
+            editor.edit(function (edit) {
+                for (let i = 0; i < editor.selections.length; i++) {
+                    const selection = editor.selections[i];
+
+                    if (!selection.isEmpty) {
+                        const range = new vscode.Range(selection.start, selection.end);
+                        let text = getStringArray(editor.document.getText(range)).join("-");
+                        text = text.replace(/(-[a-z])/g, function (w) {
+                            return w.toUpperCase().replace(/-/, "");
+                        });
+                        text = text[0].toUpperCase() + text.substring(1);
+                        edit.replace(range, text);
+                    }
+                }
+            });
+        } else {
+            vscode.window.showInformationMessage("There is no activeTextEditor!");
+        }
+    });
+    context.subscriptions.push(pascal);
 }
 
 module.exports = {
