@@ -23,5 +23,5 @@ A utility can modify the word capitalized for vscode.
 4. 驼峰式命名，快捷键：Alt + Ctrl + C；
 5. 短划线分隔，快捷键： Alt + Ctrl + D；
 6. 下划线分隔，快捷键：Alt + Ctrl + Z。
-7. 大驼峰带空格，快捷键：Alt + Ctrl + Space。
-8. 帕斯卡(大驼峰式)命名，快捷键：Alt + Ctrl + P；
+7. 大写驼峰带空格，快捷键：Alt + Ctrl + Space。
+8. 帕斯卡（大写驼峰式）命名，快捷键：Alt + Ctrl + P；
