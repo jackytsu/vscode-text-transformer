@@ -1,235 +1,88 @@
 import * as vscode from "vscode";
 
 function activate(context: vscode.ExtensionContext) {
-    const getStringArray = function (text: string) {
-        const str = [];
-        let lastPos = 0,
-            i;
-
-        for (i = 0; i < text.length; i++) {
-            if (/[\s\-_A-Z]/.test(text.charAt(i))) {
-                const s = text.substring(lastPos, i).replace(/[\s\-_]/, "");
-                if (s.length > 0) {
-                    str.push(s.toLowerCase());
-                }
-                lastPos = i;
-            }
-        }
-
-        if (lastPos < text.length) {
-            const s = text.substring(lastPos, i).replace(/[\s\-_]/, "");
-            if (s.length > 0) {
-                str.push(s.toLowerCase());
-            }
-        }
-
-        return str;
-    };
-
-    const textTransform = function (separator: string) {
+    function transformString <D extends boolean> (transformFunction: (input: D extends true | undefined ? string[] : string) => string, destructured: D): void;
+    function transformString (transformFunction: (input: string | string[]) => string, destructured: boolean): void {
         const editor = vscode.window.activeTextEditor;
-        if (editor) {
-            if (!editor.selections || editor.selections.length === 0) {
-                vscode.window.showInformationMessage("There is no selected text!");
-                return;
-            }
+        if (!editor) {
+            vscode.window.showInformationMessage("There is no activeTextEditor!");
+            return;
+        }
 
-            editor.edit(function (edit) {
-                for (let i = 0; i < editor.selections.length; i++) {
-                    const selection = editor.selections[i];
+        if (!editor.selections || editor.selections.length === 0) {
+            vscode.window.showInformationMessage("There is no selected text!");
+            return;
+        }
 
-                    if (!selection.isEmpty) {
-                        const range = new vscode.Range(selection.start, selection.end);
-                        let text = editor.document.getText(range);
-
-                        text = getStringArray(text).join(separator);
-                        edit.replace(range, text);
+        editor.edit(function (edit) {
+            editor.selections.forEach((selection) => {
+                if (!selection.isEmpty) {
+                    const range = new vscode.Range(selection.start, selection.end);
+                    let text: string | string[] = editor.document.getText(range);
+                    if (destructured) {
+                        text = getStringArray(text);
                     }
+                    edit.replace(range, transformFunction(text));
                 }
             });
-        } else {
-            vscode.window.showInformationMessage("There is no activeTextEditor!");
-        }
-    };
+        });
+    }
 
-    // console.log('Congratulations, your extension "text-transformer" is now active!');
+    function getStringArray (text: string): string[] {
+        // Regex explaination and tests: https://regex101.com/r/CLuhyu/1/
+        const textGroupsMatcher = /([^\s\-_A-Z]+)|([A-Z]+[^\s\-_A-Z]*)/g;
+        return text.match(textGroupsMatcher) || [];
+    }
 
-    const dashed = vscode.commands.registerCommand("text-transformer.dashed", function () {
-        textTransform("-");
-    });
-    context.subscriptions.push(dashed);
+    function toKebabCase(input: string[]): string {
+        return input.join("-").toLowerCase();
+    }
 
-    const underline = vscode.commands.registerCommand("text-transformer.underline", function () {
-        textTransform("_");
-    });
-    context.subscriptions.push(underline);
+    function toSnakeCase(input: string[]): string {
+        return input.join("_").toLowerCase();
+    }
 
-    const upper = vscode.commands.registerCommand("text-transformer.upper", function () {
-        const editor = vscode.window.activeTextEditor;
-        if (editor) {
-            if (!editor.selections || editor.selections.length === 0) {
-                vscode.window.showInformationMessage("There is no selected text!");
-                return;
-            }
+    function toUpperCase(input: string): string {
+        return input.toUpperCase();
+    }
 
-            editor.edit(function (edit) {
-                for (let i = 0; i < editor.selections.length; i++) {
-                    const selection = editor.selections[i];
+    function toLowerCase(input: string): string {
+        return input.toLowerCase();
+    }
 
-                    if (!selection.isEmpty) {
-                        const range = new vscode.Range(selection.start, selection.end);
-                        const text = editor.document.getText(range).toUpperCase();
-                        edit.replace(range, text);
-                    }
-                }
-            });
-        } else {
-            vscode.window.showInformationMessage("There is no activeTextEditor!");
-        }
-    });
-    context.subscriptions.push(upper);
+    function toReverse(input: string): string {
+        return Array.from(input).map(char => char.toLowerCase() === char ? char.toUpperCase() : char.toLowerCase()).join();
+    }
 
-    const lower = vscode.commands.registerCommand("text-transformer.lower", function () {
-        const editor = vscode.window.activeTextEditor;
-        if (editor) {
-            if (!editor.selections || editor.selections.length === 0) {
-                vscode.window.showInformationMessage("There is no selected text!");
-                return;
-            }
+    function toCamelCase(input: string[]) {
+        const pascalInput = toPascalCase(input);
+        return pascalInput.charAt(0).toLowerCase() + pascalInput.slice(1);
+    }
 
-            editor.edit(function (edit) {
-                for (let i = 0; i < editor.selections.length; i++) {
-                    const selection = editor.selections[i];
+    function toCamelSpaceCase(input: string[]) {
+        return input
+            .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+            .join(" ");
+    }
 
-                    if (!selection.isEmpty) {
-                        const range = new vscode.Range(selection.start, selection.end);
-                        const text = editor.document.getText(range).toLowerCase();
-                        edit.replace(range, text);
-                    }
-                }
-            });
-        } else {
-            vscode.window.showInformationMessage("There is no activeTextEditor!");
-        }
-    });
-    context.subscriptions.push(lower);
+    function toPascalCase(input: string[]) {
+        return input.map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join('');
+    }
 
-    const reverse = vscode.commands.registerCommand("text-transformer.reverse", function () {
-        const editor = vscode.window.activeTextEditor;
-        if (editor) {
-            if (!editor.selections || editor.selections.length === 0) {
-                vscode.window.showInformationMessage("There is no selected text!");
-                return;
-            }
+    function registerCommand (name: string, transformFunction: () => void) {
+        const command = vscode.commands.registerCommand(`text-transformer.${name}`, transformFunction);
+    
+        context.subscriptions.push(command);
+    }
 
-            editor.edit(function (edit) {
-                for (let i = 0; i < editor.selections.length; i++) {
-                    const selection = editor.selections[i];
-
-                    if (!selection.isEmpty) {
-                        const range = new vscode.Range(selection.start, selection.end);
-                        const text = editor.document.getText(range);
-                        const str = [];
-
-                        for (i = 0; i < text.length; i++) {
-                            const s = text.charAt(i);
-                            str.push(s.toLowerCase() === s ? s.toUpperCase() : s.toLowerCase());
-                        }
-                        edit.replace(range, str.join(""));
-                    }
-                }
-            });
-        } else {
-            vscode.window.showInformationMessage("There is no activeTextEditor!");
-        }
-    });
-    context.subscriptions.push(reverse);
-
-    const camel = vscode.commands.registerCommand("text-transformer.camel", function () {
-        const editor = vscode.window.activeTextEditor;
-        if (editor) {
-            if (!editor.selections || editor.selections.length === 0) {
-                vscode.window.showInformationMessage("There is no selected text!");
-                return;
-            }
-
-            editor.edit(function (edit) {
-                for (let i = 0; i < editor.selections.length; i++) {
-                    const selection = editor.selections[i];
-
-                    if (!selection.isEmpty) {
-                        const range = new vscode.Range(selection.start, selection.end);
-                        let text = getStringArray(editor.document.getText(range)).join("-");
-                        text = text.replace(/(-[a-z])/g, function (w) {
-                            return w.toUpperCase().replace(/-/, "");
-                        });
-                        edit.replace(range, text);
-                    }
-                }
-            });
-        } else {
-            vscode.window.showInformationMessage("There is no activeTextEditor!");
-        }
-    });
-    context.subscriptions.push(camel);
-
-    const camel_space = vscode.commands.registerCommand("text-transformer.camel_space", function () {
-        const editor = vscode.window.activeTextEditor;
-        if (editor) {
-            if (!editor.selections || editor.selections.length === 0) {
-                vscode.window.showInformationMessage("There is no selected text!");
-                return;
-            }
-
-            editor.edit(function (edit) {
-                for (let i = 0; i < editor.selections.length; i++) {
-                    const selection = editor.selections[i];
-
-                    if (!selection.isEmpty) {
-                        const range = new vscode.Range(selection.start, selection.end);
-                        let text = getStringArray(editor.document.getText(range)).join("-");
-                        text = text.replace(/(-[a-z])/g, function (w) {
-                            return ' '+w.toUpperCase().replace(/-/, "");
-                        });
-                        text = text[0].toUpperCase() + text.substring(1);
-                        edit.replace(range, text);
-                    }
-                }
-            });
-        } else {
-            vscode.window.showInformationMessage("There is no activeTextEditor!");
-        }
-    });
-    context.subscriptions.push(camel_space);
-
-    const pascal = vscode.commands.registerCommand("text-transformer.pascal", function () {
-        const editor = vscode.window.activeTextEditor;
-        if (editor) {
-            if (!editor.selections || editor.selections.length === 0) {
-                vscode.window.showInformationMessage("There is no selected text!");
-                return;
-            }
-
-            editor.edit(function (edit) {
-                for (let i = 0; i < editor.selections.length; i++) {
-                    const selection = editor.selections[i];
-
-                    if (!selection.isEmpty) {
-                        const range = new vscode.Range(selection.start, selection.end);
-                        let text = getStringArray(editor.document.getText(range)).join("-");
-                        text = text.replace(/(-[a-z])/g, function (w) {
-                            return w.toUpperCase().replace(/-/, "");
-                        });
-                        text = text[0].toUpperCase() + text.substring(1);
-                        edit.replace(range, text);
-                    }
-                }
-            });
-        } else {
-            vscode.window.showInformationMessage("There is no activeTextEditor!");
-        }
-    });
-    context.subscriptions.push(pascal);
+    registerCommand('dashed', () => transformString(toKebabCase, true));
+    registerCommand('underline', () => transformString(toSnakeCase, true));
+    registerCommand('upper', () => transformString(toUpperCase, false));
+    registerCommand('lower', () => transformString(toLowerCase, false));
+    registerCommand('reverse', () => transformString(toReverse, false));
+    registerCommand('camel', () => transformString(toCamelCase, true));
+    registerCommand('camel_space', () => transformString(toCamelSpaceCase, true));
+    registerCommand('pascal', () => transformString(toPascalCase, true));
 }
 
 module.exports = {
