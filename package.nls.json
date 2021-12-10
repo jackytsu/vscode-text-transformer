@@ -1,10 +1,10 @@
 {
-	"text-transformer.upper.title": "Upper Case",
-	"text-transformer.lower.title": "Lower Case",
-	"text-transformer.reverse.title": "Reverse Case",
-	"text-transformer.camel.title": "Camel Case",
-	"text-transformer.camel_space.title": "Upper Camel Case with Space",
-	"text-transformer.pascal.title": "Pascal Case",
-	"text-transformer.dashed.title": "Dashed Line",
-	"text-transformer.underline.title": "Underline"
+	"text-transformer.upper.title": "Text Transform > UPPERCASE",
+	"text-transformer.lower.title": "Text Transform > lowercase",
+	"text-transformer.reverse.title": "Text Transform > rEVERSE cASE",
+	"text-transformer.camel.title": "Text Transform > camelCase",
+	"text-transformer.camel_space.title": "Text Transform > Upper Camel Case With Space",
+	"text-transformer.pascal.title": "Text Transform > PascalCase",
+	"text-transformer.dashed.title": "Text Transform > kebab-case",
+	"text-transformer.underline.title": "Text Transform > snake_case"
 }
