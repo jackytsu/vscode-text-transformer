@@ -1,8 +1,8 @@
 import * as vscode from "vscode";
 
 function activate(context: vscode.ExtensionContext) {
-    function transformString <D extends boolean> (transformFunction: (input: D extends true | undefined ? string[] : string) => string, destructured: D): void;
-    function transformString (transformFunction: (input: string | string[]) => string, destructured: boolean): void {
+    function transformString<D extends boolean>(transformFunction: (input: D extends true | undefined ? string[] : string) => string, destructured: D): void;
+    function transformString(transformFunction: (input: string | string[]) => string, destructured: boolean): void {
         const editor = vscode.window.activeTextEditor;
         if (!editor) {
             vscode.window.showInformationMessage("There is no activeTextEditor!");
@@ -28,7 +28,7 @@ function activate(context: vscode.ExtensionContext) {
         });
     }
 
-    function getStringArray (text: string): string[] {
+    function getStringArray(text: string): string[] {
         // Regex explaination and tests: https://regex101.com/r/CLuhyu/1/
         const textGroupsMatcher = /([^\s\-_A-Z]+)|([A-Z]+[^\s\-_A-Z]*)/g;
         return text.match(textGroupsMatcher) || [];
@@ -69,9 +69,9 @@ function activate(context: vscode.ExtensionContext) {
         return input.map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join('');
     }
 
-    function registerCommand (name: string, transformFunction: () => void) {
+    function registerCommand(name: string, transformFunction: () => void) {
         const command = vscode.commands.registerCommand(`text-transformer.${name}`, transformFunction);
-    
+
         context.subscriptions.push(command);
     }
 
