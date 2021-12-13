@@ -2,7 +2,7 @@
     "name": "text-transformer",
     "displayName": "Text Transformer for VS Code",
     "description": "A utility can modify the word capitalized for vscode.",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "publisher": "JackyTsu",
     "license": "MIT",
     "engines": {
