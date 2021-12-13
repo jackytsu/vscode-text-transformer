@@ -2,8 +2,8 @@
 All notable changes to the "Text Transformer for VS Code" extension will be documented in this file.
 
 ## [0.0.7]
-- refactor main functions. Thanks @Kapcash.
-- Rename commands to reflect the result(English only). Thanks @Kapcash.
+- refactor main functions. Thanks [@Kapcash](https://github.com/Kapcash).
+- Rename commands to reflect the result(English only). Thanks [@Kapcash](https://github.com/Kapcash).
 
 ## [0.0.6]
 - add pascal case.
