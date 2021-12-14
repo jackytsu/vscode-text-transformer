@@ -29,7 +29,7 @@ function activate(context: vscode.ExtensionContext) {
     }
 
     function getStringArray(text: string): string[] {
-        // Regex explaination and tests: https://regex101.com/r/CLuhyu/1/
+        // Regex explaination and tests: https://regex101.com/library/zT4rM9
         const textGroupsMatcher = /([^\s\-_A-Z]+)|([A-Z]+[^\s\-_A-Z]*)/g;
         return text.match(textGroupsMatcher) || [];
     }
