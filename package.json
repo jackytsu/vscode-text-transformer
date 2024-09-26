@@ -57,55 +57,59 @@
                 "title": "%text-transformer.underline.title%"
             }
         ],
+        "submenus": [
+            {
+                "id": "text.transform",
+                "label": "Text Transform"
+            }
+        ],
         "menus": {
-            "editor/context": [
+            "text.transform": [
                 {
                     "when": "editorHasSelection",
                     "command": "text-transformer.upper",
-                    "alt": "text-transformer.upper",
-                    "group": "7_modification@1"
+                    "alt": "text-transformer.upper"
                 },
                 {
                     "when": "editorHasSelection",
                     "command": "text-transformer.lower",
-                    "alt": "text-transformer.lower",
-                    "group": "7_modification@2"
+                    "alt": "text-transformer.lower"
                 },
                 {
                     "when": "editorHasSelection",
                     "command": "text-transformer.reverse",
-                    "alt": "text-transformer.reverse",
-                    "group": "7_modification@3"
+                    "alt": "text-transformer.reverse"
                 },
                 {
                     "when": "editorHasSelection",
                     "command": "text-transformer.camel",
-                    "alt": "text-transformer.camel",
-                    "group": "7_modification@4"
+                    "alt": "text-transformer.camel"
                 },
                 {
                     "when": "editorHasSelection",
                     "command": "text-transformer.camel_space",
-                    "alt": "text-transformer.camel_space",
-                    "group": "7_modification@7"
+                    "alt": "text-transformer.camel_space"
                 },
                 {
                     "when": "editorHasSelection",
                     "command": "text-transformer.dashed",
-                    "alt": "text-transformer.dashed",
-                    "group": "7_modification@5"
+                    "alt": "text-transformer.dashed"
                 },
                 {
                     "when": "editorHasSelection",
                     "command": "text-transformer.underline",
-                    "alt": "text-transformer.underline",
-                    "group": "7_modification@6"
+                    "alt": "text-transformer.underline"
                 },
                 {
                     "when": "editorHasSelection",
                     "command": "text-transformer.pascal",
-                    "alt": "text-transformer.pascal",
-                    "group": "7_modification@8"
+                    "alt": "text-transformer.pascal"
+                }
+            ],
+            "editor/context": [
+                {
+                    "submenu": "text.transform",
+                    "group": "7_modification"
                 }
             ]
         },
