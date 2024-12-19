@@ -1,6 +1,12 @@
 # Change Log
 All notable changes to the "Text Transformer for VS Code" extension will be documented in this file.
 
+## [0.0.8]
+- Move contextual menu items into a group. Thanks [@Kapcash](https://github.com/Kapcash).
+- add Pascal_Case_With_Underline.
+- some project reconfigurations.
+- some word plays.
+
 ## [0.0.7]
 - refactor main functions. Thanks [@Kapcash](https://github.com/Kapcash).
 - Rename commands to reflect the result(English only). Thanks [@Kapcash](https://github.com/Kapcash).

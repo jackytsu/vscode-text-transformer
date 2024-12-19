@@ -1,10 +1,11 @@
 {
-    "text-transformer.upper.title": "大写",
-    "text-transformer.lower.title": "小写",
-    "text-transformer.reverse.title": "反转",
-    "text-transformer.camel.title": "驼峰",
-    "text-transformer.camel_space.title": "大写驼峰带空格",
-    "text-transformer.pascal.title": "大写驼峰",
-    "text-transformer.dashed.title": "短划线",
-    "text-transformer.underline.title": "下划线"
+    "text-transformer.upper.title": "大写（UPPERCASE）",
+    "text-transformer.lower.title": "小写（lowercase）",
+    "text-transformer.reverse.title": "反转（rEVERSE cASE）",
+    "text-transformer.camel.title": "驼峰（camelCase）",
+    "text-transformer.camel_space.title": "大写驼峰带空格（Upper Camel Case With Space）",
+    "text-transformer.pascal.title": "大写驼峰（PascalCase）",
+    "text-transformer.pascal_underline.title": "大写驼峰带下划线（Pascal_Case_With_Underline）",
+    "text-transformer.dashed.title": "短划线（kebab-case）",
+    "text-transformer.underline.title": "下划线（snake_case）"
 }

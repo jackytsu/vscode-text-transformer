@@ -1,16 +1,19 @@
 import * as vscode from "vscode";
 
-function activate(context: vscode.ExtensionContext) {
+export function activate(context: vscode.ExtensionContext) {
+    const ttLog: vscode.LogOutputChannel = vscode.window.createOutputChannel("Text Transformer", { log: true });
+    ttLog.info(vscode.l10n.t("Text Transformer activated."));
+
     function transformString<D extends boolean>(transformFunction: (input: D extends true | undefined ? string[] : string) => string, destructured: D): void;
     function transformString(transformFunction: (input: string | string[]) => string, destructured: boolean): void {
         const editor = vscode.window.activeTextEditor;
         if (!editor) {
-            vscode.window.showInformationMessage("There is no activeTextEditor!");
+            vscode.window.showInformationMessage(vscode.l10n.t("There is no activeTextEditor!"));
             return;
         }
 
-        if (!editor.selections || editor.selections.length === 0) {
-            vscode.window.showInformationMessage("There is no selected text!");
+        if (!editor.selections || editor.selections.length === 0 || (editor.selections.length === 1 && editor.selections[0].isEmpty)) {
+            vscode.window.showInformationMessage(vscode.l10n.t("There is no selected text!"));
             return;
         }
 
@@ -69,6 +72,10 @@ function activate(context: vscode.ExtensionContext) {
         return input.map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join('');
     }
 
+    function toPascalUnderline(input: string[]) {
+        return input.map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()).join('_');
+    }
+
     function registerCommand(name: string, transformFunction: () => void) {
         const command = vscode.commands.registerCommand(`text-transformer.${name}`, transformFunction);
 
@@ -83,8 +90,7 @@ function activate(context: vscode.ExtensionContext) {
     registerCommand('camel', () => transformString(toCamelCase, true));
     registerCommand('camel_space', () => transformString(toCamelSpaceCase, true));
     registerCommand('pascal', () => transformString(toPascalCase, true));
+    registerCommand('pascal_underline', () => transformString(toPascalUnderline, true));
 }
 
-module.exports = {
-    activate,
-};
+export function deactivate() { }

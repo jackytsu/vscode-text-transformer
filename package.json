@@ -2,26 +2,17 @@
     "name": "text-transformer",
     "displayName": "Text Transformer for VS Code",
     "description": "A utility can modify the word capitalized for vscode.",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "publisher": "JackyTsu",
     "license": "MIT",
     "engines": {
-        "vscode": "^1.34.0"
+        "vscode": "^1.74.0"
     },
     "categories": [
         "Other"
     ],
-    "activationEvents": [
-        "onCommand:text-transformer.dashed",
-        "onCommand:text-transformer.underline",
-        "onCommand:text-transformer.upper",
-        "onCommand:text-transformer.lower",
-        "onCommand:text-transformer.reverse",
-        "onCommand:text-transformer.camel",
-        "onCommand:text-transformer.camel_space",
-        "onCommand:text-transformer.pascal"
-    ],
     "main": "./out/text-transformer.js",
+    "l10n": "./l10n",
     "contributes": {
         "commands": [
             {
@@ -49,6 +40,10 @@
                 "title": "%text-transformer.pascal.title%"
             },
             {
+                "command": "text-transformer.pascal_underline",
+                "title": "%text-transformer.pascal_underline.title%"
+            },
+            {
                 "command": "text-transformer.dashed",
                 "title": "%text-transformer.dashed.title%"
             },
@@ -57,55 +52,64 @@
                 "title": "%text-transformer.underline.title%"
             }
         ],
+        "submenus": [
+            {
+                "id": "text.transform",
+                "label": "Text Transform"
+            }
+        ],
         "menus": {
-            "editor/context": [
+            "text.transform": [
                 {
                     "when": "editorHasSelection",
                     "command": "text-transformer.upper",
-                    "alt": "text-transformer.upper",
-                    "group": "7_modification@1"
+                    "alt": "text-transformer.upper"
                 },
                 {
                     "when": "editorHasSelection",
                     "command": "text-transformer.lower",
-                    "alt": "text-transformer.lower",
-                    "group": "7_modification@2"
+                    "alt": "text-transformer.lower"
                 },
                 {
                     "when": "editorHasSelection",
                     "command": "text-transformer.reverse",
-                    "alt": "text-transformer.reverse",
-                    "group": "7_modification@3"
+                    "alt": "text-transformer.reverse"
                 },
                 {
                     "when": "editorHasSelection",
                     "command": "text-transformer.camel",
-                    "alt": "text-transformer.camel",
-                    "group": "7_modification@4"
+                    "alt": "text-transformer.camel"
                 },
                 {
                     "when": "editorHasSelection",
                     "command": "text-transformer.camel_space",
-                    "alt": "text-transformer.camel_space",
-                    "group": "7_modification@7"
+                    "alt": "text-transformer.camel_space"
                 },
                 {
                     "when": "editorHasSelection",
                     "command": "text-transformer.dashed",
-                    "alt": "text-transformer.dashed",
-                    "group": "7_modification@5"
+                    "alt": "text-transformer.dashed"
                 },
                 {
                     "when": "editorHasSelection",
                     "command": "text-transformer.underline",
-                    "alt": "text-transformer.underline",
-                    "group": "7_modification@6"
+                    "alt": "text-transformer.underline"
                 },
                 {
                     "when": "editorHasSelection",
                     "command": "text-transformer.pascal",
-                    "alt": "text-transformer.pascal",
-                    "group": "7_modification@8"
+                    "alt": "text-transformer.pascal"
+                },
+                {
+                    "when": "editorHasSelection",
+                    "command": "text-transformer.pascal_underline",
+                    "alt": "text-transformer.pascal_underline"
+                }
+            ],
+            "editor/context": [
+                {
+                    "submenu": "text.transform",
+                    "group": "7_modification"
                 }
             ]
         },
@@ -114,68 +118,76 @@
                 "command": "text-transformer.upper",
                 "key": "ctrl+alt+u",
                 "mac": "cmd+alt+u",
-                "when": "editorTextFocus"
+                "when": "editorHasSelection"
             },
             {
                 "command": "text-transformer.lower",
                 "key": "ctrl+alt+l",
                 "mac": "cmd+alt+l",
-                "when": "editorTextFocus"
+                "when": "editorHasSelection"
             },
             {
                 "command": "text-transformer.reverse",
                 "key": "ctrl+alt+r",
                 "mac": "cmd+alt+r",
-                "when": "editorTextFocus"
+                "when": "editorHasSelection"
             },
             {
                 "command": "text-transformer.camel",
                 "key": "ctrl+alt+c",
                 "mac": "cmd+alt+c",
-                "when": "editorTextFocus"
+                "when": "editorHasSelection"
             },
             {
                 "command": "text-transformer.camel_space",
                 "key": "ctrl+alt+space",
                 "mac": "cmd+alt+space",
-                "when": "editorTextFocus"
+                "when": "editorHasSelection"
             },
             {
                 "command": "text-transformer.pascal",
                 "key": "ctrl+alt+p",
                 "mac": "cmd+alt+p",
-                "when": "editorTextFocus"
+                "when": "editorHasSelection"
+            },
+            {
+                "command": "text-transformer.pascal_underline",
+                "key": "ctrl+alt+x",
+                "mac": "cmd+alt+x",
+                "when": "editorHasSelection"
             },
             {
                 "command": "text-transformer.dashed",
                 "key": "ctrl+alt+d",
                 "mac": "cmd+alt+d",
-                "when": "editorTextFocus"
+                "when": "editorHasSelection"
             },
             {
                 "command": "text-transformer.underline",
                 "key": "ctrl+alt+z",
                 "mac": "cmd+alt+z",
-                "when": "editorTextFocus"
+                "when": "editorHasSelection"
             }
         ]
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
         "compile": "tsc -p ./",
-        "lint": "eslint . --ext .ts,.tsx",
+        "lint": "eslint src",
         "watch": "tsc -watch -p ./"
     },
     "devDependencies": {
-        "@types/node": "^12.12.0",
-        "@types/vscode": "^1.34.0",
-        "@typescript-eslint/eslint-plugin": "^3.0.2",
-        "@typescript-eslint/parser": "^3.0.2",
-        "eslint": "^7.1.0",
-        "typescript": "^3.9.4"
+        "@types/mocha": "^10.0.10",
+        "@types/node": "20.x",
+        "@types/vscode": "^1.73.0",
+        "@typescript-eslint/eslint-plugin": "^8.17.0",
+        "@typescript-eslint/parser": "^8.17.0",
+        "@vscode/l10n-dev": "^0.0.35",
+        "eslint": "^9.16.0",
+        "typescript": "^5.7.2"
     },
     "dependencies": {
-        "vscode-nls": "^4.1.0"
+        "@vscode/l10n": "^0.0.10"
     },
     "repository": {
         "type": "git",
